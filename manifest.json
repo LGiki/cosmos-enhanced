@@ -14,8 +14,7 @@
     "service_worker": "background.js"
   },
   "permissions": [
-    "downloads",
-    "background"
+    "downloads"
   ],
   "content_scripts": [
     {
