@@ -1,0 +1,14 @@
+{
+  "name": "cosmos-enhanced",
+  "version": "1.0.0",
+  "description": "Enhance cosmos podcast page",
+  "main": "cosmos-enhanced.js",
+  "scripts": {
+    "format": "prettier --config .prettierrc --write ."
+  },
+  "author": "LGiki",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}

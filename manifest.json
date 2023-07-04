@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Cosmos Enhanced",
+  "description": "Enhance cosmos podcast page",
+  "author": "LGiki",
+  "homepage_url": "https://github.com/LGiki/cosmos-enhanced",
+  "version": "1.0.0.0",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "downloads",
+    "background"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.xiaoyuzhoufm.com/episode/*",
+        "*://www.xiaoyuzhoufm.com/podcast/*"
+      ],
+      "js": [
+        "cosmos-enhanced.js"
+      ],
+      "css": [
+        "cosmos-enhanced.css"
+      ]
+    }
+  ]
+}

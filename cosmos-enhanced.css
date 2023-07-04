@@ -1,0 +1,54 @@
+.cosmos-enhanced-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.cosmos-enhanced-buttons-container {
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+}
+
+#playback-rate-controller {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    color: var(--theme-color);
+    font-weight: 500;
+    font-size: 15px;
+    gap: 5px;
+}
+
+#playback-rate-controller > button {
+    all: unset;
+    cursor: pointer;
+    background: var(--theme-color);
+    height: 14px;
+    width: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    color: #fff;
+}
+
+.cosmos-button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 2px;
+    padding: 6px;
+    background: linear-gradient(
+        180deg,
+        hsla(var(--theme-color-hsl), 1) 0%,
+        hsla(var(--theme-color-hsl), 0.8) 100%
+    );
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
