@@ -157,7 +157,7 @@ const generateDownloadAudioButton = (container) => {
     if (audioElement) {
         const audioUrl = audioElement.src;
         const audioFilename = getAudioFilename(audioUrl);
-        const downloadButton = generateButton('🎵 下载播客音频', () => {
+        const downloadButton = generateButton('🎵 下载单集音频', () => {
             chrome.runtime.sendMessage({
                 action: 'download',
                 data: {
