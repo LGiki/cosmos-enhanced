@@ -157,15 +157,18 @@ const generateDownloadAudioButton = (container) => {
     if (audioElement) {
         const audioUrl = audioElement.src;
         const audioFilename = getAudioFilename(audioUrl);
-        const downloadButton = generateButton('🎵 下载单集音频', () => {
-            chrome.runtime.sendMessage({
-                action: 'download',
-                data: {
-                    url: audioUrl,
-                    filename: audioFilename,
-                },
-            });
-        });
+        const downloadButton = generateButton(
+            '<span class="emoji">🎵</span>&nbsp;下载单集音频',
+            () => {
+                chrome.runtime.sendMessage({
+                    action: 'download',
+                    data: {
+                        url: audioUrl,
+                        filename: audioFilename,
+                    },
+                });
+            },
+        );
         container.appendChild(downloadButton);
     }
 };
@@ -179,15 +182,18 @@ const generateDownloadEpisodeCoverButton = (container) => {
         const episodeName = getEpisodeName();
         const podcastName = getPodcastName();
         const filename = `${episodeName} - ${podcastName}${extensionName}`;
-        const downloadButton = generateButton('🖼 下载单集封面', () => {
-            chrome.runtime.sendMessage({
-                action: 'download',
-                data: {
-                    url: coverImageUrl,
-                    filename: filename,
-                },
-            });
-        });
+        const downloadButton = generateButton(
+            '<span class="emoji">🖼</span>&nbsp;下载单集封面',
+            () => {
+                chrome.runtime.sendMessage({
+                    action: 'download',
+                    data: {
+                        url: coverImageUrl,
+                        filename: filename,
+                    },
+                });
+            },
+        );
         container.appendChild(downloadButton);
     }
 };
@@ -205,15 +211,18 @@ const generateDownloadPodcastCoverButton = (container) => {
         const extensionName = getImageFileExtension(coverImageUrl);
         const podcastName = getPodcastName();
         const filename = `${podcastName}${extensionName}`;
-        const downloadButton = generateButton('🖼 下载播客封面', () => {
-            chrome.runtime.sendMessage({
-                action: 'download',
-                data: {
-                    url: coverImageUrl,
-                    filename: filename,
-                },
-            });
-        });
+        const downloadButton = generateButton(
+            '<span class="emoji">🖼</span>&nbsp;下载播客封面',
+            () => {
+                chrome.runtime.sendMessage({
+                    action: 'download',
+                    data: {
+                        url: coverImageUrl,
+                        filename: filename,
+                    },
+                });
+            },
+        );
         container.appendChild(downloadButton);
     }
 };
@@ -234,14 +243,17 @@ const generateDownloadPodcasterAvatarButton = (container) => {
         });
     }
     if (downloadTaskList.length > 0) {
-        const downloadButton = generateButton('🖼 下载主播头像', () => {
-            for (const downloadTask of downloadTaskList) {
-                chrome.runtime.sendMessage({
-                    action: 'download',
-                    data: downloadTask,
-                });
-            }
-        });
+        const downloadButton = generateButton(
+            '<span class="emoji">🖼</span>&nbsp;下载主播头像',
+            () => {
+                for (const downloadTask of downloadTaskList) {
+                    chrome.runtime.sendMessage({
+                        action: 'download',
+                        data: downloadTask,
+                    });
+                }
+            },
+        );
         container.appendChild(downloadButton);
     }
 };
@@ -249,14 +261,17 @@ const generateDownloadPodcasterAvatarButton = (container) => {
 const generateSearchPodcastButton = (container) => {
     const podcastName = getPodcastName();
     if (podcastName) {
-        const searchButton = generateButton('🔍 在 ListenNotes 搜索播客', () => {
-            chrome.runtime.sendMessage({
-                action: 'openNewTab',
-                data: {
-                    url: getListenNotesSearchUrl(podcastName),
-                },
-            });
-        });
+        const searchButton = generateButton(
+            '<span class="emoji">🔍</span>&nbsp;在&nbsp;ListenNotes&nbsp;搜索播客',
+            () => {
+                chrome.runtime.sendMessage({
+                    action: 'openNewTab',
+                    data: {
+                        url: getListenNotesSearchUrl(podcastName),
+                    },
+                });
+            },
+        );
         container.appendChild(searchButton);
     }
 };
@@ -264,14 +279,17 @@ const generateSearchPodcastButton = (container) => {
 const generateSearchEpisodeButton = (container) => {
     const episodeName = getEpisodeName();
     if (episodeName) {
-        const searchButton = generateButton('🔍 在 ListenNotes 搜索单集', () => {
-            chrome.runtime.sendMessage({
-                action: 'openNewTab',
-                data: {
-                    url: getListenNotesSearchUrl(episodeName),
-                },
-            });
-        });
+        const searchButton = generateButton(
+            '<span class="emoji">🔍</span>&nbsp;在&nbsp;ListenNotes&nbsp;搜索单集',
+            () => {
+                chrome.runtime.sendMessage({
+                    action: 'openNewTab',
+                    data: {
+                        url: getListenNotesSearchUrl(episodeName),
+                    },
+                });
+            },
+        );
         container.appendChild(searchButton);
     }
 };
