@@ -337,7 +337,9 @@ const callback = (mutationsList) => {
         if (mutation.type === 'childList') {
             const cosmosEnhancedContainer = document.querySelector('.cosmos-enhanced-container');
             const playbackRateController = document.querySelector('#playback-rate-controller');
-            cosmosEnhancedContainer.remove();
+            if (cosmosEnhancedContainer) {
+                cosmosEnhancedContainer.remove();
+            }
             if (isValidXiaoyuzhouPodcastUrl(window.location.href)) {
                 enhancePodcastPage();
             } else if (isValidXiaoyuzhouEpisodeUrl(window.location.href)) {
