@@ -1,9 +1,9 @@
 const isValidXiaoyuzhouEpisodeUrl = (url) => {
-    return /^https?:\/\/(?:www\.)?xiaoyuzhoufm.com\/episode\/([0-9a-zA-Z]{24})$/.test(url);
+    return /^https?:\/\/(?:www\.)?xiaoyuzhoufm.com\/episode\/([0-9a-zA-Z]{24})/.test(url);
 };
 
 const isValidXiaoyuzhouPodcastUrl = (url) => {
-    return /^https?:\/\/(?:www\.)?xiaoyuzhoufm.com\/podcast\/([0-9a-zA-Z]{24})$/.test(url);
+    return /^https?:\/\/(?:www\.)?xiaoyuzhoufm.com\/podcast\/([0-9a-zA-Z]{24})/.test(url);
 };
 
 const getPodcastName = () => {
