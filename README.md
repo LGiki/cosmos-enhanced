@@ -20,7 +20,7 @@
 
 # Screenshot
 
-![cosmos-enhanced](https://github.com/LGiki/cosmos-enhanced/assets/20807713/94eb1880-ff2a-4a20-b08c-eea2064ee959)
+![cosmos-enhanced](https://github.com/LGiki/cosmos-enhanced/assets/20807713/1e5b0faa-221e-45bb-9813-97f84a7746f2)
 
 # Installation
 
