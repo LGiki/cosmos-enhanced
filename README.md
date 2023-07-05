@@ -16,7 +16,6 @@
 - 搜索
   - 在 ListenNotes 搜索播客
   - 在 ListenNotes 搜索单集
-- 下载主播头像原图
 - 为播放器增加倍速功能
 
 # Screenshot
