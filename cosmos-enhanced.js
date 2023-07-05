@@ -142,12 +142,10 @@ const generatePlaybackRateController = () => {
     }
 };
 
-const generateButton = (text, onClick) => {
+const generateButton = (innerHTML, onClick) => {
     const button = document.createElement('button');
     button.className = 'cosmos-button';
-    button.innerHTML = text;
-    button.title = text;
-    button.ariaLabel = text;
+    button.innerHTML = innerHTML;
     button.onclick = onClick;
     return button;
 };
