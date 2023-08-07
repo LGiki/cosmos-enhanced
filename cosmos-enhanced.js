@@ -20,6 +20,10 @@ const getEpisodeName = () => {
     return null;
 };
 
+const stripInvalidFilename = (filename) => {
+    return filename.replace(/[/\\?%*:|"<>]/g, '');
+};
+
 const getAudioFilename = (audioFileUrl) => {
     const supportFileExtensions = [
         '.mp3',
@@ -162,7 +166,7 @@ const generateDownloadAudioButton = (container) => {
                     action: 'download',
                     data: {
                         url: audioUrl,
-                        filename: audioFilename,
+                        filename: stripInvalidFilename(audioFilename),
                     },
                 });
             },
@@ -187,7 +191,7 @@ const generateDownloadEpisodeCoverButton = (container) => {
                     action: 'download',
                     data: {
                         url: coverImageUrl,
-                        filename: filename,
+                        filename: stripInvalidFilename(filename),
                     },
                 });
             },
@@ -216,7 +220,7 @@ const generateDownloadPodcastCoverButton = (container) => {
                     action: 'download',
                     data: {
                         url: coverImageUrl,
-                        filename: filename,
+                        filename: stripInvalidFilename(filename),
                     },
                 });
             },
@@ -247,7 +251,7 @@ const generateDownloadPodcasterAvatarButton = (container) => {
                 for (const downloadTask of downloadTaskList) {
                     chrome.runtime.sendMessage({
                         action: 'download',
-                        data: downloadTask,
+                        data: stripInvalidFilename(downloadTask),
                     });
                 }
             },
