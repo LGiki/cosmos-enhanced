@@ -1,5 +1,5 @@
 DIST := ./dist
-OBJECTS := icons/ *.js *.css manifest.json
+OBJECTS := icons *.js *.css manifest.json
 
 PACKAGE_NAME := cosmos-enhanced
 PACKAGE_VERSION := $(shell cat ./manifest.json | jq -r '.version')
@@ -12,6 +12,6 @@ clean:
 build:
 	rm -rf ${DIST}; \
 	mkdir -p ${DIST}; \
-	cp -r ${OBJECTS} ${DIST}; \
+	cp -R ${OBJECTS} ${DIST}; \
 	cd ${DIST}; \
 	zip -r ${PACKAGE_NAME}-${PACKAGE_VERSION}.zip .; \
