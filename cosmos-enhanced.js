@@ -241,7 +241,7 @@ const generateDownloadPodcasterAvatarButton = (container) => {
         const filename = `${podcastName} - ${podcasterName}${extensionName}`;
         downloadTaskList.push({
             url: avatarUrl,
-            filename: filename,
+            filename: stripInvalidFilename(filename),
         });
     }
     if (downloadTaskList.length > 0) {
@@ -251,7 +251,7 @@ const generateDownloadPodcasterAvatarButton = (container) => {
                 for (const downloadTask of downloadTaskList) {
                     chrome.runtime.sendMessage({
                         action: 'download',
-                        data: stripInvalidFilename(downloadTask),
+                        data: downloadTask,
                     });
                 }
             },
