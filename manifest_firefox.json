@@ -20,5 +20,11 @@
             "js": ["cosmos-enhanced.js"],
             "css": ["cosmos-enhanced.css"]
         }
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "cosmos-enhanced@lgiki.net",
+            "strict_min_version": "109.0"
+        }
+    }
 }
