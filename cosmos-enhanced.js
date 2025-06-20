@@ -84,13 +84,12 @@ const getListenNotesSearchUrl = (keyword) => {
 };
 
 const generatePlaybackRateController = () => {
-    const controlContainer = document.querySelector('.controls');
     const audioElement = document.querySelector('audio');
+    const controlContainer = audioElement.previousSibling;
 
     if (controlContainer && audioElement) {
         audioElement.addEventListener('ratechange', () => {
             const playbackRateValue = audioElement.playbackRate;
-            console.log(`playbackRate: ${playbackRateValue.toFixed(1)}`);
             playbackRate.innerHTML = `${playbackRateValue.toFixed(1)}x`;
         });
 
