@@ -20,6 +20,7 @@
     font-weight: 500;
     font-size: 15px;
     gap: 5px;
+    font-variant-numeric: tabular-nums;
 }
 
 #playback-rate-controller > button {
@@ -33,6 +34,7 @@
     justify-content: center;
     border-radius: 2px;
     color: #fff;
+    font-family: monospace;
 }
 
 .cosmos-button {
@@ -54,6 +56,7 @@
 }
 
 .emoji {
-    font-family: 'Twemoji Mozilla', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    font-family:
+        'Twemoji Mozilla', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji', 'EmojiOne Color', 'Android Emoji', sans-serif;
 }
