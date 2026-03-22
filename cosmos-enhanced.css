@@ -55,6 +55,12 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.cosmos-button:focus-visible,
+#playback-rate-controller > button:focus-visible {
+    outline: 2px solid var(--theme-color);
+    outline-offset: 2px;
+}
+
 .emoji {
     font-family:
         'Twemoji Mozilla', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
