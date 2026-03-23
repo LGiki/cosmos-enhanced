@@ -20,13 +20,13 @@
 
 # Screenshot
 
-![](https://github.com/LGiki/cosmos-enhanced/assets/20807713/db648276-52ef-455a-b1b2-530b0be626ab)
+<img width="520" src="https://github.com/LGiki/cosmos-enhanced/assets/20807713/db648276-52ef-455a-b1b2-530b0be626ab" />
 
 # Installation
 
 |                            Chrome                            |                             Edge                             |                           Firefox                            |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [<img width="300" src="https://user-images.githubusercontent.com/20807713/212001658-8252c4b5-dce3-4571-bd8f-cc4695876555.svg" />](https://chrome.google.com/webstore/detail/cosmos-enhanced/bgjffbeeolcikmcpliaekbgdkflchakg)<br />[Chrome Web Store](https://chrome.google.com/webstore/detail/cosmos-enhanced/bgjffbeeolcikmcpliaekbgdkflchakg) | [<img width="300" src="https://user-images.githubusercontent.com/20807713/212001768-365fc123-cfaa-4dfa-b88c-8d5aa9352820.png" />](https://microsoftedge.microsoft.com/addons/detail/cosmos-enhanced/mkfidjfdbllllghbnhkhhaolkdinkpdl)<br />[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/cosmos-enhanced/mkfidjfdbllllghbnhkhhaolkdinkpdl) | [<img width="300" src="https://github.com/LGiki/cosmos-enhanced/assets/20807713/0bcd6813-44ca-4751-afc6-1576840e59a1" />](https://addons.mozilla.org/addon/cosmos-enhanced/)<br />[Firefox Browser ADD-ONS](https://addons.mozilla.org/addon/cosmos-enhanced/) |
+| [<img width="250" src="https://user-images.githubusercontent.com/20807713/212001658-8252c4b5-dce3-4571-bd8f-cc4695876555.svg" />](https://chrome.google.com/webstore/detail/cosmos-enhanced/bgjffbeeolcikmcpliaekbgdkflchakg)<br />[Chrome Web Store](https://chrome.google.com/webstore/detail/cosmos-enhanced/bgjffbeeolcikmcpliaekbgdkflchakg) | [<img width="250" src="https://user-images.githubusercontent.com/20807713/212001768-365fc123-cfaa-4dfa-b88c-8d5aa9352820.png" />](https://microsoftedge.microsoft.com/addons/detail/cosmos-enhanced/mkfidjfdbllllghbnhkhhaolkdinkpdl)<br />[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/cosmos-enhanced/mkfidjfdbllllghbnhkhhaolkdinkpdl) | [<img width="250" src="https://github.com/LGiki/cosmos-enhanced/assets/20807713/0bcd6813-44ca-4751-afc6-1576840e59a1" />](https://addons.mozilla.org/addon/cosmos-enhanced/)<br />[Firefox Browser ADD-ONS](https://addons.mozilla.org/addon/cosmos-enhanced/) |
 
 # For Firefox
 
