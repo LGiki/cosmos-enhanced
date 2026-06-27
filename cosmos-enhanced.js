@@ -15,7 +15,12 @@ const getPodcastName = () => {
         }
     }
     const nameElement = document.querySelector('.podcast-title .name');
-    return nameElement ? nameElement.innerText : null;
+    if (nameElement) {
+        return nameElement.innerText;
+    }
+    // If no name element, try the co-podcast-title element
+    const coNameElement = document.querySelector('.co-podcast-title .names');
+    return coNameElement ? coNameElement.innerText : null;
 };
 
 const getEpisodeName = () => {
@@ -201,17 +206,98 @@ const generatePlaybackRateController = () => {
     controlContainer.appendChild(playbackRateController);
 };
 
-const generateButton = (emoji, text, onClick) => {
-    const button = document.createElement('button');
-    button.className = 'cosmos-button';
+const appendButtonContent = (element, emoji, text) => {
     const emojiSpan = document.createElement('span');
     emojiSpan.className = 'emoji';
     emojiSpan.textContent = emoji;
-    button.appendChild(emojiSpan);
-    button.append('\u00A0' + text);
+    element.appendChild(emojiSpan);
+    element.append('\u00A0' + text);
+};
+
+const generateButton = (emoji, text, onClick) => {
+    const button = document.createElement('button');
+    button.className = 'cosmos-button';
+    appendButtonContent(button, emoji, text);
     button.onclick = onClick;
     return button;
 };
+
+const generateDropdownButton = (emoji, text, menuItems) => {
+    const dropdown = document.createElement('details');
+    dropdown.className = 'cosmos-dropdown';
+
+    const dropdownButton = document.createElement('summary');
+    dropdownButton.className = 'cosmos-button';
+    appendButtonContent(dropdownButton, emoji, text);
+    dropdown.appendChild(dropdownButton);
+
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'cosmos-dropdown-menu';
+    for (const { text: menuItemText, onClick } of menuItems) {
+        const menuItem = document.createElement('button');
+        menuItem.type = 'button';
+        menuItem.className = 'cosmos-dropdown-item';
+        menuItem.textContent = menuItemText;
+        menuItem.onclick = () => {
+            onClick();
+            dropdown.removeAttribute('open');
+        };
+        dropdownMenu.appendChild(menuItem);
+    }
+    dropdown.appendChild(dropdownMenu);
+
+    dropdown.addEventListener('toggle', () => {
+        if (!dropdown.open) {
+            return;
+        }
+        for (const otherDropdown of document.querySelectorAll('.cosmos-dropdown[open]')) {
+            if (otherDropdown !== dropdown) {
+                otherDropdown.removeAttribute('open');
+            }
+        }
+    });
+
+    return dropdown;
+};
+
+const getCoPodcastInfoList = () => {
+    const coPodcastNameElements = document.querySelectorAll(
+        '.co-podcast-title .names a, .co-podcast-title .name',
+    );
+    return Array.from(document.querySelectorAll('.co-podcast-image')).map(
+        (avatarElement, index) => {
+            const linkedElement = avatarElement.closest('a');
+            const podcastName =
+                avatarElement.alt?.trim() ||
+                avatarElement.getAttribute('aria-label')?.trim() ||
+                linkedElement?.getAttribute('aria-label')?.trim() ||
+                linkedElement?.title?.trim() ||
+                linkedElement?.innerText?.trim() ||
+                coPodcastNameElements[index]?.innerText?.trim() ||
+                `播客 ${index + 1}`;
+            return { avatarElement, podcastName };
+        },
+    );
+};
+
+document.addEventListener('click', (event) => {
+    for (const dropdown of document.querySelectorAll('.cosmos-dropdown[open]')) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.removeAttribute('open');
+        }
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+        return;
+    }
+    const dropdown = document.querySelector('.cosmos-dropdown[open]');
+    if (dropdown) {
+        dropdown.removeAttribute('open');
+        dropdown.querySelector('summary')?.focus();
+    }
+});
 
 const generateDownloadAudioButton = (container) => {
     const audioElement = document.querySelector('audio');
@@ -235,12 +321,13 @@ const generateDownloadAudioButton = (container) => {
     container.appendChild(downloadButton);
 };
 
+const getEpisodeCoverImageUrl = () => {
+    const avatarElement = document.querySelector('header .avatar, header .episode-image');
+    return avatarElement ? getFullImageUrl(avatarElement.src) : null;
+};
+
 const generateDownloadEpisodeCoverButton = (container) => {
-    const avatarElement = document.querySelector('header .avatar');
-    if (!avatarElement) {
-        return;
-    }
-    const coverImageUrl = getFullImageUrl(avatarElement.src);
+    const coverImageUrl = getEpisodeCoverImageUrl();
     if (!coverImageUrl) {
         return;
     }
@@ -264,33 +351,71 @@ const generateDownloadEpisodeCoverButton = (container) => {
 };
 
 const generateDownloadPodcastCoverButton = (container) => {
+    const createDownloadTask = (avatarElement, podcastName) => {
+        const coverImageUrl = getFullImageUrl(avatarElement.src);
+        if (!coverImageUrl || !podcastName) {
+            return null;
+        }
+        const extensionName = getImageFileExtension(coverImageUrl);
+        return {
+            url: coverImageUrl,
+            filename: stripInvalidFilename(`${podcastName}${extensionName}`),
+            podcastName,
+        };
+    };
+
+    const downloadCover = (downloadTask) => {
+        sendMessage({
+            action: 'download',
+            data: {
+                url: downloadTask.url,
+                filename: downloadTask.filename,
+            },
+        });
+    };
+
+    if (isValidXiaoyuzhouEpisodeUrl(window.location.href)) {
+        const coPodcastInfoList = getCoPodcastInfoList();
+        if (coPodcastInfoList.length > 1) {
+            const downloadTaskList = coPodcastInfoList
+                .map(({ avatarElement, podcastName }) =>
+                    createDownloadTask(avatarElement, podcastName),
+                )
+                .filter(Boolean);
+
+            if (downloadTaskList.length === 0) {
+                return;
+            }
+
+            const dropdown = generateDropdownButton(
+                '🖼',
+                '下载播客封面',
+                downloadTaskList.map((downloadTask) => ({
+                    text: downloadTask.podcastName,
+                    onClick: () => downloadCover(downloadTask),
+                })),
+            );
+            container.appendChild(dropdown);
+            return;
+        }
+    }
+
     let avatarElement = null;
     if (isValidXiaoyuzhouEpisodeUrl(window.location.href)) {
-        avatarElement = document.querySelector('header .side-avatar');
+        avatarElement = document.querySelector('.co-podcast-image, header .side-avatar');
     } else if (isValidXiaoyuzhouPodcastUrl(window.location.href)) {
         avatarElement = document.querySelector('.avatar');
     }
     if (!avatarElement) {
         return;
     }
-    const coverImageUrl = getFullImageUrl(avatarElement.src);
-    if (!coverImageUrl) {
+    const podcastName = avatarElement.alt?.trim() || getPodcastName();
+    const downloadTask = createDownloadTask(avatarElement, podcastName);
+    if (!downloadTask) {
         return;
     }
-    const extensionName = getImageFileExtension(coverImageUrl);
-    const podcastName = getPodcastName();
-    if (!podcastName) {
-        return;
-    }
-    const filename = `${podcastName}${extensionName}`;
     const downloadButton = generateButton('🖼', '下载播客封面', () => {
-        sendMessage({
-            action: 'download',
-            data: {
-                url: coverImageUrl,
-                filename: stripInvalidFilename(filename),
-            },
-        });
+        downloadCover(downloadTask);
     });
     container.appendChild(downloadButton);
 };
@@ -329,15 +454,35 @@ const generateDownloadPodcasterAvatarButton = (container) => {
 };
 
 const generateSearchPodcastButton = (container) => {
+    const searchPodcast = (podcastName) => {
+        sendMessage({
+            action: 'openNewTab',
+            data: {
+                url: getListenNotesSearchUrl(podcastName),
+            },
+        });
+    };
+
+    if (isValidXiaoyuzhouEpisodeUrl(window.location.href)) {
+        const coPodcastInfoList = getCoPodcastInfoList();
+        if (coPodcastInfoList.length > 1) {
+            const dropdown = generateDropdownButton(
+                '🔍',
+                '在\u00A0ListenNotes\u00A0搜索播客',
+                coPodcastInfoList.map(({ podcastName }) => ({
+                    text: podcastName,
+                    onClick: () => searchPodcast(podcastName),
+                })),
+            );
+            container.appendChild(dropdown);
+            return;
+        }
+    }
+
     const podcastName = getPodcastName();
     if (podcastName) {
         const searchButton = generateButton('🔍', '在\u00A0ListenNotes\u00A0搜索播客', () => {
-            sendMessage({
-                action: 'openNewTab',
-                data: {
-                    url: getListenNotesSearchUrl(podcastName),
-                },
-            });
+            searchPodcast(podcastName);
         });
         container.appendChild(searchButton);
     }

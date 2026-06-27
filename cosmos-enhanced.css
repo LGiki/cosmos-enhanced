@@ -56,9 +56,70 @@
 }
 
 .cosmos-button:focus-visible,
+.cosmos-dropdown-item:focus-visible,
 #playback-rate-controller > button:focus-visible {
     outline: 2px solid var(--theme-color);
     outline-offset: 2px;
+}
+
+.cosmos-dropdown {
+    position: relative;
+}
+
+.cosmos-dropdown > summary {
+    list-style: none;
+}
+
+.cosmos-dropdown > summary::-webkit-details-marker {
+    display: none;
+}
+
+.cosmos-dropdown > summary::after {
+    content: '▾';
+    margin-left: 6px;
+    transition: transform 0.15s ease;
+}
+
+.cosmos-dropdown[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+.cosmos-dropdown-menu {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid hsla(var(--theme-color-hsl), 0.2);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.14),
+        0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cosmos-dropdown-item {
+    all: unset;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    color: #333;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+    border-radius: 5px;
+    transition:
+        color 0.12s ease,
+        background-color 0.12s ease;
+}
+
+.cosmos-dropdown-item:hover,
+.cosmos-dropdown-item:focus-visible {
+    color: #fff;
+    background: var(--theme-color);
 }
 
 .emoji {
